@@ -9,6 +9,8 @@
         "root": ["./"],
         "alias": {
           "components": "./components",
+          "content": "./content",
+          "marquees": "./marquees",
           "assets": "./assets",
           "fonts": "./assets/fonts",
           "store": "./store",
@@ -24,7 +26,10 @@
         "preprocess": false
       }
     ],
-    "transform-decorators-legacy",
+    [
+      "@babel/plugin-proposal-decorators", 
+      { "legacy": true }
+    ],
     "transform-class-properties",
     "inline-react-svg"
   ]

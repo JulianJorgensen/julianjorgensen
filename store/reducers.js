@@ -3,48 +3,41 @@ import actionTypes from 'store/types';
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ACTIVATE_MARQUEE_SLIDER:
+    case actionTypes.UPDATE_ACTIVE_SLIDE:
       return {
         ...state,
-        marquee: {
-          ...state.marquee,
-          active: true
-        }
+        activeSlide: action.slide
       };
-    case actionTypes.DEACTIVATE_MARQUEE_SLIDER:
+    case actionTypes.UPDATE_PREV_SLIDE:
       return {
         ...state,
-        marquee: {
-          ...state.marquee,
-          active: false
-        }
+        prevSlide: action.slide
       };
-    case actionTypes.SWITCH_TO_LIGHT_CONTENT:
+    case actionTypes.HIDE_ACTIVE_SLIDE:
       return {
         ...state,
-        lightContent: true
+        activeSlideHidden: action.activeSlideHidden
       };
-    case actionTypes.SWITCH_TO_DARK_CONTENT:
+    case actionTypes.SET_AUTO_SCROLL:
       return {
         ...state,
-        lightContent: false
+        autoScroll: action.autoScroll
       };
-    case actionTypes.SWITCH_MARQUEE_TO_LIGHT_CONTENT:
+    case actionTypes.SET_HAS_MOUSE_LEFT_NEXT_SLIDE:
       return {
         ...state,
-        lightContent: true,
-        marquee: {
-          ...state.marquee,
-          lightContent: true
-        }
+        hasMouseLeftNextSlide: action.hasMouseLeftNextSlide
       };
-    case actionTypes.SWITCH_MARQUEE_TO_DARK_CONTENT:
+    case actionTypes.SET_USE_PREV_AS_NEXT_SLIDE:
       return {
         ...state,
-        lightContent: false,
-        marquee: {
-          ...state.marquee,
-          lightContent: false
+        usePrevAsNextSlide: action.usePrevAsNextSlide
+      };
+    case actionTypes.SET_IS_SCROLL_N_SLIDING:
+      return {
+        ...state,
+        slider: {
+          isScrollNSliding: action.isScrollNSliding
         }
       };
     case actionTypes.TOGGLE_MOBILE_NAV:
@@ -57,6 +50,17 @@ export default (state = initialState, action) => {
         ...state,
         mobileNav: false
       };
+    case actionTypes.SET_HEADER_SOLID:
+      return {
+        ...state,
+        headerSolid: action.solid
+      };
+    case actionTypes.CONFIRM_FONTS_LOADED:
+      return {
+        ...state,
+        fontsLoaded: true
+      };
+
     default: return state
   }
 }

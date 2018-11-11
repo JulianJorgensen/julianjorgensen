@@ -23,3 +23,15 @@ export const easings = {
   easeOutSine: 'cubic-bezier(.39,.575,.565,1)',
   easeInOutCustom: 'cubic-bezier(.45,.035,.045,.95)'
 }
+
+export const standAlonePages = [
+  'about',
+  'work',
+  'contact',
+  'privacy'
+];
+
+export const meta = {
+  title: 'THANK YOU &reg; designs digital experiences and connect brands',
+  description: 'Design thinking is at the core of everything we do. The result is always fresh, vibrant and relevant.'
+}

@@ -1,26 +1,51 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import Head from 'next/head';
+import StandAlonePage from 'components/StandAlonePage';
+import Locations from 'components/Locations';
 import styled from 'styled-components';
-import styles from 'utils/styles';
-import { switchToDarkContent } from 'store/actions';
+import { meta } from 'utils/variables';
 
-const Wrapper = styled.div`
-  ${styles.defaultWrapper};
+const PageTitle = styled.h1`
+  position: absolute;
+  font-size: 70px;
+  transform: rotate(-90deg);
+  transform-origin: left bottom;
+  margin-top: 100px;
+  margin-left: 20px;
+  opacity: 0.3;
+  text-transform: uppercase;
+  font-size: 48px;
 `
 
-@connect((store) => ({
-  store,
-}))
-export default class Team extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(switchToDarkContent());
-  }
+const Content = styled.div`
+  padding: 200px 80px;
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+`
 
-  render () {
+const Header = styled.div`
+`
+
+const Title = styled.h2`
+  font-size: 70px;
+`
+
+const Lead = styled.div`
+  font-size: 25px;
+`
+
+export default class ContactPage extends Component {
+  render() {
     return (
-      <Wrapper>
-        <h1>contact page</h1>
-      </Wrapper>
+      <StandAlonePage>
+        <Head>
+          <title>Contact {meta.description}</title>
+        </Head>
+        <Content>
+          <Locations />
+        </Content>
+      </StandAlonePage>
     )
   }
 }

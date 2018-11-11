@@ -1,82 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Router, { withRouter } from 'next/router'
-import NavItem from './components/NavItem';
-import Logo from 'components/Logo';
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import Headroom from 'react-headroom';
 import { closeMobileNav, toggleMobileNav } from 'store/actions';
+import Nav from './components/Nav';
 import MobileNav from './components/MobileNav';
+import Bars from './components/Bars';
 
-const Wrapper = styled.header`
+const StyledHeadroom = styled(Headroom)`
   position: fixed;
-  top: 40px;
   z-index: 99;
   width: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-`
-
-const Nav = styled.div`
-  color: ${props => props.lightContent ? 'white' : 'black'};
-  transition: color 0.2s;
-
-  display: flex;
-  align-items: flex-end;
-
-  svg path {
-    fill: ${props => props.lightContent ? 'white' : 'black'}
-  }
-`
-
-const StyledLogo = styled(Logo)`
-  font-size: 30px;
-  line-height: 30px;
-`
-
-const Bars = styled.div`
-  position: relative;
-  z-index: 100;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-
-  ${media.lessThan('medium')`
-    display: none;
+  ${props => props.fontsloaded && `
+    opacity: 1;
   `}
 
-  &:after,
-  &:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 6px;
-    height: 3px;
-    width: 30px;
-    background-color: ${props => props.lightContent ? 'white' : 'black'};
-    transition: all 0.3s ease;
+  .headroom {
+    background-color: transparent;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
+    padding: 40px;
+    display: flex;
+    align-items: center;  
+    pointer-events: auto;
   }
 
-  &:before {
-    transform: translateY(4px);
-  }
-  &:after {
-    transform: translateY(-4px);
-  }
+  ${props => props.scrolling && `
+    .headroom {
+      padding: 40px;
+      background-color: transparent;
+      transition: all 0s;
+    }
+  `}
 
-  ${props => props.active && `
-    &:after,
-    &:before {
-      background-color: white;
-    }
-    &:before {
-      transform: rotate(45deg) translateY(0);
-    }
-    &:after {
-      transform: rotate(-45deg) translateY(0);
+  ${props => props.fixed && `
+    .headroom {
+      padding: 20px 40px;
+      background-color: ${props.color === 'white' ? 'black' : 'white'};
+      transition-delay: 0.6s;
+
+      ${props.scrolling && `
+        background-color: transparent;
+        transition-delay: 0s;
+        transition-duration: 0s;
+        padding: 40px;
+      `}
     }
   `}
 `
@@ -86,40 +60,74 @@ const Bars = styled.div`
   store,
 }))
 export default class Header extends Component {
-  state = {};
+  constructor() {
+    super();
 
-  handleMobileNavClick() {
-    this.props.dispatch(toggleMobileNav());
+    this.state = {};
+    this.handleOnUnpin = this.handleOnUnpin.bind(this);
+    this.handleOnPin = this.handleOnPin.bind(this);
+    this.handleOnUnfix = this.handleOnUnfix.bind(this);
   }
 
-  componentDidUpdate() {
+  componentWillUpdate() {
     Router.onRouteChangeStart = url => {
       this.props.dispatch(closeMobileNav());
     }
   }
 
-  render() {
-    const { store, router: { pathname, asPath } } = this.props;
-    let barsLightContent;
+  handleMobileNavClick() {
+    this.props.dispatch(toggleMobileNav());
+  }
 
-    if (store.marquee && store.marquee.active) {
-      barsLightContent = !store.lightContent
-    } else {
-      barsLightContent = store.lightContent;
+  handleOnUnpin() {
+    this.setState({
+      onPinned: false,
+      fixed: true
+    });
+  }
+
+  handleOnPin() {
+    this.setState({
+      onPinned: true,
+      fixed: true
+    });
+  }
+
+  handleOnUnfix() {
+    this.setState({
+      fixed: false
+    });
+  }
+
+  render() {
+    const { store, router } = this.props;
+    const { fixed } = this.state;
+    const { activeSlide, slider, mobileNav } = store;
+
+    let windowHeight;
+    if (typeof(window) === 'object') {
+      windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     }
 
+    const contentColor = activeSlide ? activeSlide.contentColor : 'black';
+
+    const page = router.asPath.split('/')[1];
+
     return (
-      <Wrapper>
-        <Nav lightContent={store.lightContent || store.mobileNav}>
-          <NavItem lightContent={store.lightContent} anchor={<StyledLogo />} href="/" logo />
-          <NavItem lightContent={store.lightContent} active={pathname === '/about'} anchor="About" href="/about" />
-          <NavItem lightContent={store.lightContent} active={pathname === '/work' || asPath.substring(0,5) === '/work' } anchor="Work" href="/work" />
-          <NavItem lightContent={store.lightContent} active={pathname === '/team'} anchor="Team" href="/team" />
-          <NavItem lightContent={store.lightContent} active={pathname === '/contact'} anchor="Contact" href="/contact" />
-        </Nav>
-        <Bars lightContent={barsLightContent} active={store.mobileNav} onClick={this.handleMobileNavClick.bind(this)} />
-        <MobileNav active={store.mobileNav} />
-      </Wrapper>
+      <StyledHeadroom 
+        onUnpin={this.handleOnUnpin}
+        onPin={this.handleOnPin}
+        onUnfix={this.handleOnUnfix}
+        pinStart={200}
+        fixed={fixed ? 'true' : ''}
+        color={contentColor}
+        scrolling={slider.isScrollNSliding ? 'true' : ''}
+        fontsloaded={store.fontsLoaded ? 'true' : ''}
+      >
+        <Nav contentColor={contentColor} page={page} />
+        <Bars active={mobileNav} onClick={this.handleMobileNavClick.bind(this)} />
+        <MobileNav active={mobileNav} />
+      </StyledHeadroom>
     );
   }
 }

@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import styles from 'utils/styles';
+import Page from 'components/Page';
 import Video from 'components/Video';
 import Cta from 'components/Cta';
-import Marquee from 'components/Marquee';
-import { switchToLightContent } from 'store/actions';
 import SwatchWatchesImg from 'assets/images/swatch-watches.png';
 import SwatchDigitalDisplaysImg from 'assets/images/swatch_digital_displays.jpg';
 import SwatchStoreDisplaysImg from 'assets/images/swatch_store_display.jpg';
@@ -13,12 +11,6 @@ import SwatchAirportImg from 'assets/images/swatch-airport.jpg';
 import SwatchPhotoshoot from 'assets/images/swatch-photoshoot.jpg';
 import SwatchPoster from 'assets/images/swatch_start_1-poster.jpg';
 import ThankYou from 'components/ThankYou';
-
-const Wrapper = styled.div`
-  ${styles.defaultWrapper};
-  background-color: white;
-  color: white;
-`
 
 const CaseContent = styled.div`
   position: relative;
@@ -28,8 +20,6 @@ const CaseContent = styled.div`
   padding: 60px;
 
   ${props => props.intro && `
-    width: calc(100% - 80px);
-    margin-top: -15vh;
     padding: 30px 60px;
 
     p {
@@ -144,15 +134,9 @@ const BusVideo = styled(Video)`
   store,
 }))
 export default class Swatch extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(switchToLightContent());
-  }
-
-  render () {
+  render() {
     return (
-      <Wrapper>
-        <Marquee vimeoId="294166889" title="Swatch skin" />
-
+      <Page isCase>
         <CaseContent intro>
           <Row>
             <Col large>
@@ -210,7 +194,8 @@ export default class Swatch extends React.Component {
         </CaseContent>
 
         <ThankYou />
-      </Wrapper>
+
+      </Page>
     )
   }
 }

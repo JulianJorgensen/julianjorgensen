@@ -1,117 +1,90 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Fullpage, Slide } from 'fullpage-react';
-import MarqueeSlider from 'components/MarqueeSlider';
-import AboutSlide from 'components/AboutSlide';
-import WorkSlide from 'components/WorkSlide';
-import TeamSlide from 'components/TeamSlide';
-import VenturesSlide from 'components/VenturesSlide';
-import Dots from 'components/Dots';
-import * as actions from 'store/actions';
+import React from 'react';
+import Work from 'components/Work';
+import Page from 'components/Page';
+import InstagramFeed from 'components/InstagramFeed';
+import styled from 'styled-components';
+import AboutSectionPlaceholder from 'assets/images/placeholders/about-section.png'
 
-const changeFullpageSlide = Fullpage;
+const Section = styled.div`
+  padding: 200px 80px;
 
-const fullPageOptions = {
-  // for mouse/wheel events
-  // represents the level of force required to generate a slide change on non-mobile, 10 is default
-  scrollSensitivity: 5,
+  ${props => props.black && `
+    background-color: black;
+    color: white;
+  `}
+`
 
-  // for touchStart/touchEnd/mobile scrolling
-  // represents the level of force required to generate a slide change on mobile, 10 is default
-  touchSensitivity: 5,
-  scrollSpeed: 500,
-  hideScrollBars: true,
-  enableArrowKeys: true,
-};
+const Header = styled.div`
+`
 
-@connect((store) => ({
-  store,
-}))
-export default class Homepage extends Component {
-  constructor(props) {
-    super(props);
+const Title = styled.h2`
+  font-size: 70px;
+`
 
-    this.state = {
-      activeSlide: 0,
-    };
-    this.onSlideChangeStart = this.onSlideChangeStart.bind(this);
-    this.onSlideChangeEnd = this.onSlideChangeEnd.bind(this);
-    this.goToSlide = this.goToSlide.bind(this);
+const Lead = styled.div`
+  font-size: 25px;
+`
+
+const AboutSection = styled.div`
+  padding: 200px 80px;
+  position: relative;
+
+  &:before {
+    content: '';
+    height: 300px;
+    width: 1px;
+    background-color: #979797;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateY(-50%);
   }
 
-  componentWillMount() {
-    const { dispatch } = this.props;
-
-    dispatch(actions.activateMarqueeSlider());
-    dispatch(actions.switchToLightContent());
+  &:after {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    height: 300px;
+    width: 1px;
+    background-color: #979797;
+    transform: translateY(45%);
+    left: 50%;
   }
+`
 
-  onSlideChangeStart(name, props, state, newState) {
-    this.setState({
-      isScrolling: true,
-      ...newState,
-    });
+const InstagramSection = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 220px;
 
-    this.switchSiteColor(props, newState);
-    
-    const { dispatch } = this.props;
-    if (newState.activeSlide > 0) {
-      dispatch(actions.deactivateMarqueeSlider());
-    } else {
-      dispatch(actions.activateMarqueeSlider());
-    }
+  &:before {
+    position: absolute;
+    top: 0;
+    content: '';
+    height: 300px;
+    width: 1px;
+    background-color: #979797;
+    transform: translateY(-120%);
   }
+`
 
-  onSlideChangeEnd(name, props, state, newState) {
-    this.setState({
-      isScrolling: false,
-      ...newState,
-    });
-  }
+export default () => (
+  <Page isPrimaryPage={true}>
+    <AboutSection id="about">
+      <img src={AboutSectionPlaceholder} />
+    </AboutSection>
 
-  goToSlide(slideId) {
-    changeFullpageSlide.bind(null, slideId);
-  }
+    <Section>
+      <Work />
+    </Section>
 
-  switchSiteColor(props, newState) {
-    const { dispatch, store } = this.props;
+    <InstagramSection>
+      <h3>Work is fun!</h3>
+      <InstagramFeed />
+    </InstagramSection>
 
-    let lightContent = props.slides[newState.activeSlide].props.lightContent;
-
-    if (newState.activeSlide === 0) {
-      lightContent = store.marquee ? store.marquee.lightContent : lightContent;
-    }
-
-    if (lightContent) {
-      dispatch(actions.switchToLightContent());
-    } else {
-      dispatch(actions.switchToDarkContent());
-    }
-  }
-
-  render() {
-    const { activeSlide, isScrolling } = this.state;
-
-    const slides = [
-      <Slide lightContent>
-        <MarqueeSlider />
-      </Slide>,
-      <Slide><AboutSlide /></Slide>,
-      <Slide lightContent><WorkSlide /></Slide>,
-      <Slide><TeamSlide /></Slide>,
-      <Slide><VenturesSlide /></Slide>,
-    ];
-    fullPageOptions.slides = slides;
-
-    return (
-      <div>
-        <Fullpage
-          onSlideChangeStart={this.onSlideChangeStart}
-          onSlideChangeEnd={this.onSlideChangeEnd}
-          {...fullPageOptions}
-        />
-        <Dots hide={activeSlide === 0} isScrolling={isScrolling} activeSlide={activeSlide} handleDotClick={this.goToSlide} />
-      </div>
-    );
-  }
-}
+  </Page>
+)

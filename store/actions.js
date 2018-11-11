@@ -1,27 +1,87 @@
 import actionTypes from 'store/types';
+import SlideItems from 'store/slideItems';
 
-export const activateMarqueeSlider = () => dispatch => {
-  return dispatch({ type: actionTypes.ACTIVATE_MARQUEE_SLIDER })
+export const updateActiveSlide = (slug) => dispatch => {
+  let slide = {};
+
+  if (slug) {
+    slide = SlideItems.find(obj => obj.slug.toLowerCase() == slug.toLowerCase());
+
+    if (slide) {
+      slide.index = SlideItems.findIndex(obj => obj === slide);
+    } else {
+      // no slide found, it must be a standalone one
+      slide = {
+        slug,
+        index: 0,
+        contentColor: 'white'
+      }
+    }
+  } else {
+    slide = SlideItems[0];
+    slide.index = 0;
+  }
+
+  return dispatch({
+    type: actionTypes.UPDATE_ACTIVE_SLIDE,
+    slide
+  });
 }
 
-export const deactivateMarqueeSlider = () => dispatch => {
-  return dispatch({ type: actionTypes.DEACTIVATE_MARQUEE_SLIDER })
+export const updatePrevSlide = (slide) => dispatch => {
+  return dispatch({
+    type: actionTypes.UPDATE_PREV_SLIDE,
+    slide
+  });
 }
 
-export const switchToLightContent = () => dispatch => {
-  return dispatch({ type: actionTypes.SWITCH_TO_LIGHT_CONTENT })
+export const setUsePrevAsNextSlide = (usePrevAsNextSlide) => dispatch => {
+  return dispatch({ 
+    type: actionTypes.SET_USE_PREV_AS_NEXT_SLIDE,
+    usePrevAsNextSlide
+  })
 }
 
-export const switchToDarkContent = () => dispatch => {
-  return dispatch({ type: actionTypes.SWITCH_TO_DARK_CONTENT })
+export const hideActiveSlide = (activeSlideHidden) => dispatch => {
+  return dispatch({ 
+    type: actionTypes.HIDE_ACTIVE_SLIDE,
+    activeSlideHidden: activeSlideHidden
+  })
 }
 
-export const switchMarqueeToLightContent = () => dispatch => {
-  return dispatch({ type: actionTypes.SWITCH_MARQUEE_TO_LIGHT_CONTENT })
+export const setHeaderSolid = (solid) => dispatch => {
+  return dispatch({ 
+    type: actionTypes.SET_HEADER_SOLID,
+    solid
+  })
 }
 
-export const switchMarqueeToDarkContent = () => dispatch => {
-  return dispatch({ type: actionTypes.SWITCH_MARQUEE_TO_DARK_CONTENT })
+export const setAutoScroll = (autoScroll) => dispatch => {
+  return dispatch({ 
+    type: actionTypes.SET_AUTO_SCROLL,
+    autoScroll
+  })
+}
+
+export const setHasMouseLeftNextSlide = (hasMouseLeftNextSlide) => dispatch => {
+  return dispatch({ 
+    type: actionTypes.SET_HAS_MOUSE_LEFT_NEXT_SLIDE,
+    hasMouseLeftNextSlide
+  })
+}
+
+export const setIsScrollNSliding = () => dispatch => {
+  setTimeout(() => {
+    return dispatch({ 
+      type: actionTypes.SET_IS_SCROLL_N_SLIDING,
+      isScrollNSliding: false
+    });
+  }, 500);
+
+  return dispatch({ 
+    type: actionTypes.SET_IS_SCROLL_N_SLIDING,
+    isScrollNSliding: true
+  })
 }
 
 export const toggleMobileNav = () => dispatch => {
@@ -30,4 +90,8 @@ export const toggleMobileNav = () => dispatch => {
 
 export const closeMobileNav = () => dispatch => {
   return dispatch({ type: actionTypes.CLOSE_MOBILE_NAV })
+}
+
+export const confirmFontsLoaded = () => dispatch => {
+  return dispatch({ type: actionTypes.CONFIRM_FONTS_LOADED })
 }
