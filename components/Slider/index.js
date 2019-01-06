@@ -18,11 +18,9 @@ const Slider = styled.div`
   left: 0;
   width: 100vw;
   height: 50vh;
-  // overflow: hidden;
-  pointer-events: none;
-
-  ${media.greaterThan('medium')`
-    height: 100vh;
+  background-color: white;
+  ${media.greaterThan('medium') `
+    height: 100vh;  
   `}
 `
 
@@ -162,7 +160,6 @@ export default class FancySlider extends Component {
 
   render() {
     const { activeSlide, prevSlide, activeSlideHidden, slider, usePrevAsNextSlide, hasMouseLeftNextSlide, fontsLoaded } = this.props.store;
-
     if (!activeSlide) return (
       <div></div>
     );

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import InstagramIcon from 'assets/icons/FontAwesome/brands/instagram.svg';
-import VimeoIcon from 'assets/icons/FontAwesome/brands/vimeo.svg';
-import FacebookIcon from 'assets/icons/FontAwesome/brands/facebook.svg';
-import Logo from 'components/Logo';
 import Cta from 'components/Cta';
 
 const Wrapper = styled.footer`
@@ -76,23 +72,11 @@ export default class Footer extends Component {
       <Wrapper>
         <LeftCol>
           <ContactUs>
-            <Headline>Got a project?</Headline>
+          <a href="mailto:jj@julianjorgensen.com"><Headline>Got a project?</Headline>
             <Subheadline>Let's talk</Subheadline>
-            <a href="mailto:jj@julianjorgensen.com"><Cta label="Contact me" white /></a>
+            <Cta label="Contact me" white /></a>
           </ContactUs>
         </LeftCol>
-        {/* <RightCol>
-          <Nav>
-            <NavItem><Link href="/about"><a>Frontend & UX</a></Link></NavItem>
-            <NavItem><Link href="/work"><a>About</a></Link></NavItem>
-            <NavItem><Link href="/contact"><a>Contact</a></Link></NavItem>
-          </Nav>
-          <SocialMediaIcons>
-            <Link href="/privacy"><a>Privacy</a></Link>
-            <a href="http://www.instagram.com/explore/tags/thankyouculture/" target="new"><InstagramIcon /></a>
-            <a href="http://facebook.com/thankyoustudio/" target="new"><FacebookIcon /></a>
-          </SocialMediaIcons>
-        </RightCol> */}
       </Wrapper>
     );
   }

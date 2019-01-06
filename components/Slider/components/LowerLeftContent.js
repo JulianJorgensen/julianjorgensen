@@ -39,8 +39,8 @@ const Title = styled.h1`
   color: ${props => props.contentColor};
   max-width: 800px;
 
-  ${media.greaterThan('large')`
-    font-size: 140px;
+  ${media.greaterThan('medium') `
+    font-size: 120px;
   `}
 `
 
@@ -52,8 +52,8 @@ const SubTitle = styled.h2`
   margin-top: 6px;
   max-width: 750px;
 
-  ${media.greaterThan('medium')`
-    font-size: 26px;
+  ${media.greaterThan('medium') `
+    font-size: 30px;
   `}
 `
 
@@ -64,7 +64,7 @@ export default class LowerLeftContent extends Component {
     return (
       <Wrapper fontsLoaded={fontsLoaded}>
         <Content isActive={isActive}>
-          <Header innerRef={div => this.headerEl = div}>
+          <Header ref={div => this.headerEl = div}>
             <Title contentColor={contentColor}>{title}</Title>
             <SubTitle contentColor={contentColor}>{subtitle}</SubTitle>
           </Header>

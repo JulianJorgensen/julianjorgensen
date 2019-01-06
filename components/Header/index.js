@@ -6,8 +6,6 @@ import media from 'styled-media-query';
 import Headroom from 'react-headroom';
 import { closeMobileNav, toggleMobileNav } from 'store/actions';
 import Nav from './components/Nav';
-import MobileNav from './components/MobileNav';
-import Bars from './components/Bars';
 
 const StyledHeadroom = styled(Headroom)`
   position: fixed;
@@ -125,8 +123,6 @@ export default class Header extends Component {
         fontsloaded={store.fontsLoaded ? 'true' : ''}
       >
         <Nav contentColor={contentColor} page={page} />
-        <Bars active={mobileNav} onClick={this.handleMobileNavClick.bind(this)} />
-        <MobileNav active={mobileNav} />
       </StyledHeadroom>
     );
   }

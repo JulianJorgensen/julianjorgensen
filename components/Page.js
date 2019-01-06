@@ -17,13 +17,6 @@ const Wrapper = styled.div`
   ${media.greaterThan('medium')`
     top: 100vh;
   `}
-
-  ${props => props.isPrimaryPage && props.usePrevAsNextSlide && `
-    transition: opacity 0s, width 0.5s !important;
-    transition-timing-function: ${easings.easeInOutCustom};
-    transition-delay: 0s !important;
-    z-index: 4;
-  `}
 `
 
 const ScrollCta = styled.a`
