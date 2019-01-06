@@ -13,7 +13,7 @@ const Wrapper = styled.footer`
   background-color: black;
   color: white;
   width: 100%;
-  padding: 80px;
+  padding: 40px;
   height: 300px;
 `
 
