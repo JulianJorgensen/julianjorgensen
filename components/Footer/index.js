@@ -41,7 +41,6 @@ const NavItem = styled.div`
 `
 
 const ContactUs = styled.div`
-  padding-left: 80px;
 `
 
 const Headline = styled.div`
@@ -52,28 +51,6 @@ const Subheadline = styled.div`
   font-size: 30px;
   opacity: 0.6;
   margin-bottom: 20px;
-`
-
-const StyledLogo = styled(Logo)`
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: rotate(-90deg) translateX(-100%);
-  transform-origin: left top;
-`
-
-const Locations = styled.div`
-  opacity: 0.6;
-  text-align: right;
-  margin-bottom: 20px;
-`
-
-const Location = styled.div`
-  margin-bottom: 10px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 `
 
 const SocialMediaIcons = styled.div`
@@ -98,28 +75,21 @@ export default class Footer extends Component {
     return (
       <Wrapper>
         <LeftCol>
-          <StyledLogo />
           <ContactUs>
             <Headline>Got a project?</Headline>
             <Subheadline>Let's talk</Subheadline>
-            <Cta href="/contact" label="Contact us" white />
+            <Cta href="/contact" label="Contact me" white />
           </ContactUs>
         </LeftCol>
         <RightCol>
           <Nav>
-            <NavItem><Link href="/about"><a>About</a></Link></NavItem>
-            <NavItem><Link href="/work"><a>Work</a></Link></NavItem>
+            <NavItem><Link href="/about"><a>Frontend & UX</a></Link></NavItem>
+            <NavItem><Link href="/work"><a>About</a></Link></NavItem>
             <NavItem><Link href="/contact"><a>Contact</a></Link></NavItem>
           </Nav>
-          <Locations>
-            <Location>Copenhagen</Location>
-            <Location>Reykjavik</Location>
-            <Location>San Francisco</Location>
-          </Locations>
           <SocialMediaIcons>
             <Link href="/privacy"><a>Privacy</a></Link>
             <a href="http://www.instagram.com/explore/tags/thankyouculture/" target="new"><InstagramIcon /></a>
-            <a href="http://vimeo.com/thankyoustudio/" target="new"><VimeoIcon /></a>
             <a href="http://facebook.com/thankyoustudio/" target="new"><FacebookIcon /></a>
           </SocialMediaIcons>
         </RightCol>

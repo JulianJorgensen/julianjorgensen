@@ -1,5 +1,6 @@
 import actionTypes from 'store/types';
 import SlideItems from 'store/slideItems';
+import { standAlonePages } from 'utils/variables';
 
 export const updateActiveSlide = (slug) => dispatch => {
   let slide = {};
@@ -11,11 +12,8 @@ export const updateActiveSlide = (slug) => dispatch => {
       slide.index = SlideItems.findIndex(obj => obj === slide);
     } else {
       // no slide found, it must be a standalone one
-      slide = {
-        slug,
-        index: 0,
-        contentColor: 'white'
-      }
+      slide = standAlonePages.find(obj => obj.slug === slug);
+      slide.index = 0;
     }
   } else {
     slide = SlideItems[0];

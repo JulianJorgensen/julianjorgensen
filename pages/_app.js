@@ -6,8 +6,6 @@ import { Provider } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Layout from 'components/Layout';
 import { meta, fonts } from 'utils/variables';
-import HelveticaNeueRoman from 'fonts/37BC46_0_0.woff2';
-import HelveticaNeueBold from 'fonts/37BC46_1_0.woff2';
 import favicon from 'assets/images/favicon.ico';
 
 @withReduxStore
@@ -23,7 +21,8 @@ export default class MyApp extends App {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <link rel="shortcut icon" href={favicon} />
-          <link rel="canonical" href="https://www.thankyoustudio.com" />
+          <link rel="canonical" href="https://www.julianjorgensen.com" />
+          <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/6281556/6972992/css/fonts.css" />
         </Head>
         <Provider store={reduxStore}>
           <Layout>
@@ -72,16 +71,10 @@ export default class MyApp extends App {
           }
 
 
-          @font-face {
-            font-family: 'Helvetica Neue';
-            src: url(${HelveticaNeueRoman}) format('woff2'),
-                url(${HelveticaNeueBold}) format('woff2');
-          }
-
           html {
             height: 100%;
             width: 100%;
-            font-family: ${fonts.primary}, Helvetica, sans-serif;
+            font-family: ${fonts.secondary}, Helvetica, sans-serif;
             overflow-y: scroll;
             overflow-x: hidden;
             background-color: black;
@@ -106,6 +99,7 @@ export default class MyApp extends App {
         
           h1, h2, h3, h4, h5, h6 {
             margin: 0;
+            font-family: ${fonts.primary};
           }
  
           h1 {

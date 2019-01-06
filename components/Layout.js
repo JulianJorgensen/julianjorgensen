@@ -23,10 +23,8 @@ export default class Layout extends Component {
     super();
 
     this.initRouterEventListeners = this.initRouterEventListeners.bind(this);
-    this.setAutoScroll = this.setAutoScroll.bind(this);
     this.setUsePrevAsNextSlide = this.setUsePrevAsNextSlide.bind(this);
     this.scrollToTop = this.scrollToTop.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
     this.toggleActiveSlide = this.toggleActiveSlide.bind(this);
   }
 
@@ -41,33 +39,11 @@ export default class Layout extends Component {
 
   componentDidMount() {
     this.initRouterEventListeners();
-    window.addEventListener('scroll', this.handleScroll);
-
     this.initFontObserver();
   }
 
-  componentDidUpdate(oldProps) {
-    const { router } = this.props;
-
-    if (oldProps.router.pathname !== router.pathname) {
-      window.addEventListener('scroll', this.handleScroll);
-    }  
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-    clearTimeout(this.autoScroll);
-  }
-
-  handleScroll() {
-    window.removeEventListener('scroll', this.handleScroll);
-
-    // prevent autoscroll
-    clearTimeout(this.autoScroll);
-  }
-
   initFontObserver() {
-    const font = new FontFaceObserver('Helvetica Neue')
+    const font = new FontFaceObserver('Gotham SSm A')
 
     font.load().then(() => {
       this.props.dispatch(actions.confirmFontsLoaded());
@@ -79,7 +55,7 @@ export default class Layout extends Component {
     Router.router.events.on('routeChangeStart', (url) => {
       const { dispatch, router, store } = this.props;
 
-      const isStandAlonePage = standAlonePages.includes(url.substr(1));
+      const isStandAlonePage = standAlonePages.find(obj => obj.slug === url.substr(1));
       const urlExploded = url.split('/');
       let slug;
 
@@ -100,8 +76,6 @@ export default class Layout extends Component {
         this.scrollToTop();
       }
 
-      clearTimeout(this.autoScroll);
-
       if (isStandAlonePage) {
         dispatch(actions.updateActiveSlide(slug));
         dispatch(actions.setHasMouseLeftNextSlide(true));
@@ -113,11 +87,6 @@ export default class Layout extends Component {
 
       if (!isStandAlonePage) {
         dispatch(actions.updateActiveSlide(slug));
-
-        dispatch(actions.setAutoScroll(true));
-        setTimeout(() => {
-          this.setAutoScroll();
-        }, SCROLL_DURATION);  
       }
 
       this.toggleActiveSlide(url);
@@ -149,8 +118,9 @@ export default class Layout extends Component {
 
   setUsePrevAsNextSlide(url) {
     const { dispatch, store } = this.props;
+    const isStandAlonePage = standAlonePages.find(obj => obj.slug === url.substr(1));
 
-    if (standAlonePages.includes(url ? url.substr(1) : '')) {
+    if (isStandAlonePage) {
       dispatch(actions.setUsePrevAsNextSlide(true));
     } else {
       dispatch(actions.setUsePrevAsNextSlide(false));
@@ -159,8 +129,9 @@ export default class Layout extends Component {
 
   toggleActiveSlide(url) {
     const { dispatch } = this.props;
+    const isStandAlonePage = standAlonePages.find(obj => obj.slug === url.substr(1));
 
-    if (standAlonePages.includes(url.substr(1))) {
+    if (isStandAlonePage) {
       dispatch(actions.hideActiveSlide(true));
     } else {
       dispatch(actions.hideActiveSlide(false));
@@ -172,18 +143,6 @@ export default class Layout extends Component {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 480); // the number has to be less than the slider animation to prevent a flickering
-  }
-
-  setAutoScroll() {
-    this.autoScroll = setTimeout(() => {
-      const { store } = this.props;
-      if (store.autoScroll) {
-        scroll.scrollTo(150, {
-          duration: SCROLL_DURATION,
-          smooth: true
-        });
-      }
-    }, 6000);
   }
 
   render() {

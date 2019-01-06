@@ -135,20 +135,8 @@ export default class FancySlider extends Component {
   }
 
   handleNextMouseLeave() {
-    const { dispatch, router } = this.props;
-    const isStandAlonePage = standAlonePages.includes(router.pathname.substr(1));
-
+    const { dispatch } = this.props;
     dispatch(actions.setHasMouseLeftNextSlide(true));
-
-    if (isStandAlonePage) return;
-
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop === 0) {
-      scroll.scrollTo(150, {
-        duration: 700,
-        smooth: true
-      });
-    }
     dispatch(actions.setAutoScroll(false));
   }
 

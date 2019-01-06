@@ -76,7 +76,7 @@ const SubTitle = styled.h2`
   font-size: 26px;
   color: ${colors.gray50};
   font-weight: 300;
-  font-family: ${fonts.primary};
+  font-family: ${fonts.secondary};
   text-transform: uppercase;
   margin-top: 6px;
 `

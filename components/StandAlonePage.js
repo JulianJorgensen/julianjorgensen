@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   overflow: hidden;
+  width: 90vw;
 
   ${props => props.isScrollNSliding && `
     position: fixed !important;

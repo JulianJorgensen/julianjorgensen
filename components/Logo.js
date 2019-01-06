@@ -1,26 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import Logo from 'assets/svgs/julian-jorgensen-logo.svg';
 
 const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  font-weight: bold;
-  font-size: 30px;
-  letter-spacing: -1px;
-  -webkit-font-smoothing: subpixel-antialiased;
   user-select: none;
 `
 
-const Small = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translate(100%, -393%);
-  line-height: 0.3em;
-  font-size: 0.3em;
+const StyledLogo = styled(Logo)`
+  width: 50px;
+  height: 50px;
 `
 
 export default (props) => (
-  <Wrapper {...props}>THANK YOU<Small>&reg;</Small></Wrapper>
+  <Wrapper {...props}><StyledLogo /></Wrapper>
 );

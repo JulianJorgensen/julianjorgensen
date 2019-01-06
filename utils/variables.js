@@ -1,5 +1,6 @@
 export const fonts = {
-  primary: 'Helvetica Neue'
+  primary: "Whitney Cond SSm A, Whitney Cond SSm B",
+  secondary: "Gotham SSm A, Gotham SSm B"
 }
 
 export const colors = {
@@ -25,13 +26,29 @@ export const easings = {
 }
 
 export const standAlonePages = [
-  'about',
-  'work',
-  'contact',
-  'privacy'
+  {
+    slug: 'frontend-ux',
+    contentColor: 'white'
+  },
+  {
+    slug: 'coaching',
+    contentColor: 'black'
+  },
+  {
+    slug: 'about',
+    contentColor: 'white'
+  },
+  {
+    slug: 'contact',
+    contentColor: 'white'
+  },
+  {
+    slug: 'privacy',
+    contentColor: 'white'
+  }
 ];
 
 export const meta = {
-  title: 'THANK YOU &reg; designs digital experiences and connect brands',
-  description: 'Design thinking is at the core of everything we do. The result is always fresh, vibrant and relevant.'
+  title: 'Julian Jorgensen: Merging frontend, UX and branding',
+  description: 'Web apps, e-commerce and high performance sites is my specialty.'
 }

@@ -40,7 +40,7 @@ const NavLink = styled.a`
 const NavLinkText = styled.div`  
   font-weight: bold;
   font-size: 20px;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 `
 

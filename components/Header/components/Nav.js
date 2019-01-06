@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   transition: color 0.2s;
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
   svg path {
     fill: ${props => props.contentColor};
@@ -27,8 +27,9 @@ export default class Nav extends Component {
     return (
       <Wrapper contentColor={contentColor}>
         <NavItem contentColor={contentColor} anchor={<StyledLogo />} href="/" logo />
+        <NavItem active={page === 'frontend-ux'} contentColor={contentColor} anchor="Frontend & UX" href="/frontend-ux" />
+        <NavItem active={page === 'coaching'} contentColor={contentColor} anchor="Coaching" href="/coaching" />
         <NavItem active={page === 'about'} contentColor={contentColor} anchor="About" href="/about" />
-        <NavItem active={page === 'work'} contentColor={contentColor} anchor="Work" href="/work" />
         <NavItem active={page === 'contact'} contentColor={contentColor} anchor="Contact" href="/contact" />
       </Wrapper>
     )
