@@ -22,10 +22,6 @@ const Wrapper = styled.div`
     }
   `}
 
-  ${props => media.lessThan('medium')`
-    display: none;
-  `}
-
   background: ${props => props.background};
 `
 export default ({ isPrevious, isNext, onMouseOut, isActiveSlideHidden, onClickHandler, hasMouseLeftNextSlide, isScrollNSliding, ...props }) => {

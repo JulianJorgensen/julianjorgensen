@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors, fonts, easings } from 'utils/variables';
+import media from "styled-media-query";
 
 const Wrapper = styled.div`
   position: absolute;
   z-index: 1;
   left: 40px;
   bottom: 40px;
-  width: 60vw;
+  width: calc(100% - 80px);
   opacity: 0;
   transition: opacity 0.2s;
   ${props => props.fontsLoaded && `
@@ -29,21 +30,31 @@ const Header = styled.div`
 `
 
 const Title = styled.h1`
-  font-size: 140px;
-  line-height: 110px;
+  font-size: 15vw;
+  line-height: 85%;
   margin-bottom: 10px;
   font-weight: 800;
   font-family: ${fonts.primary};
   text-transform: uppercase;
   color: ${props => props.contentColor};
+  max-width: 800px;
+
+  ${media.greaterThan('large')`
+    font-size: 140px;
+  `}
 `
 
 const SubTitle = styled.h2`
-  font-size: 26px;
+  font-size: 5vw;
   color: ${colors.gray50};
   font-weight: 300;
   font-family: ${fonts.secondary};
   margin-top: 6px;
+  max-width: 750px;
+
+  ${media.greaterThan('medium')`
+    font-size: 26px;
+  `}
 `
 
 export default class LowerLeftContent extends Component {

@@ -49,9 +49,6 @@ export default class LandingSlide extends Component {
     return (
       <Wrapper>
         <LowerleftContent {...this.props} />
-        <Content>
-          <PlayReel fontsLoaded={fontsLoaded}><PlayIcon /> See my work</PlayReel>
-        </Content>
       </Wrapper>  
     )
   }

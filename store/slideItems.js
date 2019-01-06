@@ -5,7 +5,7 @@ export default [
     slug: "",
     contentColor: "black",
     title: "Julian Jorgensen",
-    subtitle: "Merging frontend, UX and branding",
+    subtitle: "I merge Frontend, UX and Branding. Delivering performant web apps and e-commerce sites.",
   },
   {
     slug: "thankyou",

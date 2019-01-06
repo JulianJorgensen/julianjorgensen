@@ -9,6 +9,7 @@ import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, 
 import * as actions from 'store/actions';
 import SlideItems from 'store/slideItems';
 import { standAlonePages } from 'utils/variables';
+import media from "styled-media-query";
 
 const Slider = styled.div`
   position: absolute;
@@ -16,9 +17,13 @@ const Slider = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   // overflow: hidden;
   pointer-events: none;
+
+  ${media.greaterThan('medium')`
+    height: 100vh;
+  `}
 `
 
 const Slides = styled.div`
@@ -179,6 +184,9 @@ export default class FancySlider extends Component {
           <Slides isScrollNSliding={slider.isScrollNSliding}>
             {
               SlideItems.map((SlideItemData, i) => {
+                // hide all slides
+                if (i > 0) return;
+
                 const isPrevious = activeSlide.index === i + 1;
                 const isActive = activeSlide.index === i;
                 let isNext;

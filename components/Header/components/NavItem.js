@@ -32,9 +32,6 @@ const NavLink = styled.a`
     margin-right: 28px;
   `}
 
-  ${props => !props.logo && media.lessThan('medium')`
-    display: none;
-  `}
 `
 
 const NavLinkText = styled.div`  

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Layout from 'components/Layout';
 import { meta, fonts } from 'utils/variables';
-import favicon from 'assets/images/favicon.ico';
+import favicon from 'assets/images/favicon-32x32.png';
 
 @withReduxStore
 export default class MyApp extends App {

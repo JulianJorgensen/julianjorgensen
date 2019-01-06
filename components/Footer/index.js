@@ -12,7 +12,7 @@ const Wrapper = styled.footer`
   justify-content: space-between;
   background-color: black;
   color: white;
-  width: calc(100% - 10vw);
+  width: 100%;
   padding: 80px;
   height: 300px;
 `
@@ -78,10 +78,10 @@ export default class Footer extends Component {
           <ContactUs>
             <Headline>Got a project?</Headline>
             <Subheadline>Let's talk</Subheadline>
-            <Cta href="/contact" label="Contact me" white />
+            <a href="mailto:jj@julianjorgensen.com"><Cta label="Contact me" white /></a>
           </ContactUs>
         </LeftCol>
-        <RightCol>
+        {/* <RightCol>
           <Nav>
             <NavItem><Link href="/about"><a>Frontend & UX</a></Link></NavItem>
             <NavItem><Link href="/work"><a>About</a></Link></NavItem>
@@ -92,7 +92,7 @@ export default class Footer extends Component {
             <a href="http://www.instagram.com/explore/tags/thankyouculture/" target="new"><InstagramIcon /></a>
             <a href="http://facebook.com/thankyoustudio/" target="new"><FacebookIcon /></a>
           </SocialMediaIcons>
-        </RightCol>
+        </RightCol> */}
       </Wrapper>
     );
   }

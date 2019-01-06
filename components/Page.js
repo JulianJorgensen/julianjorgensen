@@ -5,13 +5,18 @@ import styled from 'styled-components';
 import { scroller } from 'react-scroll'
 import { easings, meta } from 'utils/variables';
 import Footer from 'components/Footer';
+import media from "styled-media-query";
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 100vh;
+  top: 50vh;
   background-color: white;
   overflow: hidden;
   width: 100%;
+
+  ${media.greaterThan('medium')`
+    top: 100vh;
+  `}
 
   ${props => props.isPrimaryPage && props.usePrevAsNextSlide && `
     transition: opacity 0s, width 0.5s !important;
