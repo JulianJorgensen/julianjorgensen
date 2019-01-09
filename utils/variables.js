@@ -19,6 +19,10 @@ export const layout = {
   containerWidth: '1100px'
 }
 
+export const TRACKING = {
+  GOOGLE_ANALYTICS: 'UA-6241825-5'
+}
+
 export const easings = {
   easeInOutQuad: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
   easeOutSine: 'cubic-bezier(.39,.575,.565,1)',

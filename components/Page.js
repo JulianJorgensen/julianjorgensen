@@ -6,6 +6,7 @@ import { scroller } from 'react-scroll'
 import { easings, meta } from 'utils/variables';
 import Footer from 'components/Footer';
 import media from "styled-media-query";
+import withAnalytics from 'utils/withAnalytics';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -36,6 +37,7 @@ const Content = styled.div`
   }
 `
 
+@withAnalytics
 @connect((store) => ({
   store,
 }))
