@@ -1,6 +1,6 @@
 export const fonts = {
-  primary: "Whitney Cond SSm A, Whitney Cond SSm B",
-  secondary: "Gotham SSm A, Gotham SSm B"
+  primary: "Helvetica, Whitney Cond SSm A, Whitney Cond SSm B",
+  secondary: "Helvetica, Gotham SSm A, Gotham SSm B"
 }
 
 export const colors = {
