@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import Cta from 'components/Cta';
+import { fonts } from 'utils/variables';
 
 const Wrapper = styled.footer`
   display: flex;
@@ -11,6 +12,7 @@ const Wrapper = styled.footer`
   width: 100%;
   padding: 40px;
   height: 300px;
+  font-family: ${fonts.primary};
 `
 
 const LeftCol = styled.div`
