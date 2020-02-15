@@ -9,11 +9,6 @@ const Wrapper = styled.div`
   left: 40px;
   bottom: 40px;
   width: calc(100% - 80px);
-  opacity: 0;
-  transition: opacity 0.2s;
-  ${props => props.fontsLoaded && `
-    opacity: 1;
-  `}
 `
 
 const Content = styled.div`
