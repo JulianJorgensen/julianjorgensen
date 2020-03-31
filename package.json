@@ -17,7 +17,7 @@
     "express": "^4.16.3",
     "fontfaceobserver": "^2.0.13",
     "gsap": "^2.0.2",
-    "next": "^7.0.2",
+    "next": "^9.3.2",
     "next-fonts": "^0.10.0",
     "next-images": "^0.10.6",
     "next-page-transitions": "^1.0.0-alpha.4",
